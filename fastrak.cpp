@@ -376,7 +376,7 @@ int gettimeofday(struct timeval * tp, struct timezone * tzp)
 VOID GetTime(time_t &usTime) {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
-	usTime = (static_cast<INT64>(tv.tv_sec) % 10000) * 1000000 + tv.tv_usec;
+	usTime = static_cast<INT64>(tv.tv_sec) * 1000000 + tv.tv_usec;
 }
 
 VOID GetBeginTime(VOID)
@@ -447,6 +447,14 @@ void mexFunction( int nlhs, mxArray *plhs[],
         StopCont();
         Disconnect();
     }
+
+	if (!strcmp(str, "now")) {
+		plhs[0] = mxCreateDoubleMatrix(1, 1, mxREAL);
+		double *p1 = mxGetPr(plhs[0]);
+		time_t now;
+		GetTime(now);
+		*p1 = now + 0.0;
+	}
 
 	if (!strcmp(str, "test")) {
 		GetBeginTime();

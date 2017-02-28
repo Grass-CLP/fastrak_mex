@@ -63,4 +63,4 @@ VOID		GetEndTime(VOID);
 VOID		ResetData(VOID);
 VOID		GetData(int & nrhs, mxArray *plhs[]);
 VOID		GetAFrame(int & nrhs, mxArray *plhs[]);
-
+VOID		GetTime(time_t &usTime);
